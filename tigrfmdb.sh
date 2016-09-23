@@ -10,12 +10,16 @@ echo $path
 echo "DECOMPRESSING THE FILES....."
 tar -C $pathTIGRFAM -xvf $path
 echo "REMOVING THE ORIGINAL TARRED TIGRFAM FILE....."
-rm $path/TIGRFAMs_*.gz
+rm $path
 echo "NOW PRESSING THE .hmm file......."                                       
 hmmpress=$(find ./ -name hmmpress)
 echo "PATH TO HMMPRESS:"$hmmpress
+path=$(find ./ -name "TIGRFAM")
 cat $path/TIGR*.HMM > $path/out.HMM
-mv $path/out.HMM $PATH/TIGRFAM.HMM
+echo "REMOVING THE INDIVIDUAL TIGRFAM FILES......."
+rm $path/TIGR*
+echo "RENAMING OUT.HMM AS TIGRFAM.HMM"
+mv $path/out.HMM $path/TIGRFAM.HMM
 echo "Pressing files..."
-$hmmpress $PATH/TIGRFAM.HMM
+$hmmpress $path/TIGRFAM.HMM
 
